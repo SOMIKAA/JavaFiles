@@ -1,0 +1,117 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Client {
+
+	public static void main(String[] args) {
+		char ch = highestfreqchar("abababababaaaa");
+		System.out.println(ch);
+		Integer one[] = { 3, 1, 2, 2, 1, 5, 1 };
+		Integer two[] = { 5, 4, 2, 1, 2, 2, 1 };
+//		Integer three[] = { 2, 12, 9, 16, 10, 5, 3, 20, 25, 11, 1, 8, 6,13 };
+//		System.out.println(getcommon1(one, two));
+		System.out.println(getcommom2(one, two));
+//		System.out.println(lcseq(three));
+	}
+
+	public static Character highestfreqchar(String words) {
+		HashMap<Character, Integer> word = new HashMap<>();
+		int c = 1;
+		for (int i = 0; i < words.length(); i++) {
+			if (word.containsKey(words.charAt(i)) == true) {
+				int k = word.get(words.charAt(i));
+				k = k + 1;
+				word.put(words.charAt(i), k);
+			} else {
+				word.put(words.charAt(i), c);
+			}
+
+		}
+		ArrayList<Character> keys = new ArrayList<>(word.keySet());
+		int max = 0;
+		char ch = ' ';
+
+		for (Character cr : keys) {
+			int r = word.get(cr);
+
+			if (r > max) {
+				max = r;
+				ch = cr;
+			}
+		}
+
+		return ch;
+
+	}
+
+	public static ArrayList<Integer> getcommon1(Integer one[], Integer two[]) {
+		HashMap<Integer, Boolean> one1 = new HashMap<>();
+		HashMap<Integer, Boolean> one2 = new HashMap<>();
+		for (int i = 0; i < one.length; i++) {
+			one1.put(one[i], false);
+		}
+		for (int j = 0; j < two.length; j++) {
+			if (one1.containsKey(two[j]) == true) {
+				one2.put(two[j], true);
+			}
+		}
+		ArrayList<Integer> final1 = new ArrayList<>(one2.keySet());
+		return final1;
+	}
+
+	public static ArrayList<Integer> getcommom2(Integer one[], Integer two[]) {
+		HashMap<Integer, Integer> one1 = new HashMap<>();
+
+		for (int i = 0; i <= one.length - 1; i++) {
+			if (one1.containsKey(one[i]) == true) {
+				one1.put(one[i], one1.get(one[i]) + 1);
+			} else {
+				one1.put(one[i], 1);
+			}
+		}
+		System.out.println(one1);
+
+		ArrayList<Integer> final1 = new ArrayList<>();
+		for (int j = 0; j <= two.length - 1; j++) {
+			if (one1.containsKey(two[j])) {
+				if (one1.get(two[j]) >= 1) {
+					final1.add(two[j]);
+					one1.put(two[j], one1.get(two[j]) - 1);
+				}
+			}
+		}
+		return final1;
+	}
+
+	public static ArrayList<Integer> lcseq(Integer one[]) {
+		HashMap<Integer, Boolean> stofseq = new HashMap<>();
+		for (int i = 0; i < one.length; i++) {
+			stofseq.put(one[i], true);
+		}
+		for (int j = 0; j < one.length; j++) {
+			if (stofseq.get(one[j])) {
+				if (stofseq.containsKey(one[j] - 1)) {
+					stofseq.put(one[j], false);
+				}
+			}
+		}
+
+		int maxl = 0;
+		int minc = -1;
+		ArrayList<Integer> final1 = new ArrayList<>();
+		for (int i = 0; i < one.length; i++) {
+			if (stofseq.get(one[i])) {
+				int tempseqlen = 1;
+				int tempseqchar = one[i];
+
+			}
+		}
+
+		for (int i = 0; i < maxl; i++) {
+			final1.add(minc + i);
+		}
+
+		return final1;
+	}
+	
+}
